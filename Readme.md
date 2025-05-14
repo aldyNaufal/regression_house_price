@@ -4,7 +4,7 @@
 
 ---
 
-![neighbourhood](images/hist_bedrooms.png)
+![neighbourhood](images/7573720.jpg)
 
 ## 📌 1. Domain Proyek: Real Estate & Urban Socioeconomics
 
