@@ -183,7 +183,7 @@ Tiga model yang digunakan:
 ### ✅ XGBoost Regressor (Terbaik)
 
 * Gradient boosting decision trees.
-* Hyperparameter tuning dilakukan menggunakan `GridSearchCV`.
+* Hyperparameter tuning dilakukan menggunakan `RandomSearchCV`.
 
 
 ## 📏 6. Evaluation
@@ -276,7 +276,7 @@ Berdasarkan hasil evaluasi terhadap ketiga model regresi:
 │   └── le_city.pkl
 ├── notebook/
 │   └── main.ipynb
-├── laporan_project.txt
+├── main.py
 ├── requirements.txt
 └── README.md
 ```
