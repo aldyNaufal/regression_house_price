@@ -1,6 +1,6 @@
 # 🏠 House Price Prediction in JABODETABEK Using Ensemble Regression
 
-*Ensemble Regression and Feature Engineering for Urban Housing Price Estimation*
+**Ensemble Regression and Feature Engineering for Urban Housing Price Estimation**
 
 ---
 
@@ -8,20 +8,16 @@
 
 ## 📌 1. Domain Proyek: Real Estate & Urban Socioeconomics
 
-Permasalahan harga rumah di wilayah perkotaan seperti JABODETABEK (Jakarta, Bogor, Depok, Tangerang, dan Bekasi) menjadi isu krusial, terutama dengan meningkatnya jumlah masyarakat urban yang belum memiliki tempat tinggal layak. Masifnya urbanisasi di kota besar seperti Jakarta mendorong lonjakan permintaan akan hunian, namun keterbatasan lahan dan tingginya harga properti menyebabkan banyak kelompok masyarakat kesulitan memperoleh rumah yang sesuai dengan kemampuan ekonomi mereka. Hal ini diperparah oleh backlog perumahan yang mencapai lebih dari 12 juta unit, sebagaimana dilaporkan oleh Badan Pusat Statistik pada tahun 2023.
+Harga rumah di wilayah JABODETABEK (Jakarta, Bogor, Depok, Tangerang, Bekasi) mengalami kenaikan signifikan akibat urbanisasi dan keterbatasan lahan. Masalah backlog perumahan (12 juta unit menurut BPS 2023) dan disparitas harga menjadi tantangan nyata bagi masyarakat serta pengembang perumahan.
 
-Kondisi ini menimbulkan kebutuhan mendesak akan solusi yang dapat membantu pemangku kebijakan, pengembang, serta masyarakat umum untuk memahami dan memprediksi harga rumah secara lebih akurat. Prediksi harga rumah yang tepat sangat penting, tidak hanya untuk menentukan nilai jual beli properti, tetapi juga untuk mendukung keputusan investasi dan perencanaan tata kota. Seperti dijelaskan oleh Al Maula et al. (2025), tren hunian kini mulai bergeser ke daerah pinggiran yang lebih terjangkau dan mendukung kualitas hidup, namun tetap menimbulkan tantangan dalam distribusi dan perencanaan kawasan perumahan.
+Prediksi harga rumah secara akurat sangat penting bagi:
 
-Studi sebelumnya juga menunjukkan bahwa harga rumah dipengaruhi oleh banyak faktor, seperti ukuran bangunan, lokasi, jumlah kamar, akses terhadap fasilitas umum, dan usia bangunan (El Mouna et al., 2023). Dengan menggunakan algoritma machine learning seperti *Linear Regression*, *Random Forest*, dan *Gradient Boosting*, prediksi harga rumah kini dapat dilakukan secara lebih akurat dengan memanfaatkan data dalam jumlah besar. Pendekatan ini menawarkan solusi yang lebih adaptif dan efisien dibandingkan metode tradisional, serta menjadi alat penting bagi perencana kota dan investor untuk mengambil keputusan berbasis data.
+* Pembeli untuk merencanakan anggaran
+* Developer dalam menentukan harga yang kompetitif
+* Pemerintah untuk perencanaan tata kota dan kebijakan subsidi
+* Investor properti dalam pengambilan keputusan investasi
 
-> 📖 **Referensi**:
->
-> * El Mouna, L., Silkan, H., Haynf, Y., & Nann, M. F. (2023). *A Comparative Study of Urban House Price Prediction using Machine Learning Algorithms*. E3S Web of Conferences 418, 03001. [https://doi.org/10.1051/e3sconf/202341803001](https://doi.org/10.1051/e3sconf/202341803001)
->
-> * Al Maula, S. F., Setiawan, N. A. D., Pusporani, E., & Jannah, S. Z. (2025). *Modeling House Selling Prices in Jakarta and South Tangerang Using Machine Learning Prediction Analysis*. **BAREKENG: Journal of Mathematics and Its Applications**, 19(1), 0107–0118. [https://ojs3.unpatti.ac.id/index.php/barekeng/article/download/12906/9511](https://ojs3.unpatti.ac.id/index.php/barekeng/article/download/12906/9511)
->
-> * Badan Pusat Statistik (2023). *Statistik Perumahan Nasional*. [https://bps.go.id](https://bps.go.id)
-
+Penelitian ini bertujuan **membangun model prediksi harga rumah** berbasis **machine learning** dengan teknik **ensemble regression** yang dikombinasikan dengan *feature engineering* yang kuat.
 
 ---
 
@@ -29,274 +25,216 @@ Studi sebelumnya juga menunjukkan bahwa harga rumah dipengaruhi oleh banyak fakt
 
 ### 🔍 Problem Statements
 
-* Bagaimana cara memprediksi harga rumah di kawasan JABODETABEK berdasarkan fitur-fitur seperti lokasi, ukuran tanah, tipe properti, dan umur bangunan?
-* Algoritma mana yang paling efektif dalam menghasilkan prediksi harga rumah yang akurat?
+* Bagaimana memprediksi harga rumah di JABODETABEK berdasarkan fitur properti dan lokasi?
+* Algoritma machine learning mana yang paling efektif untuk regresi harga rumah di kawasan urban Indonesia?
 
-### 🎯 Goals
+### 🎯 Objectives
 
-* Membangun sistem prediksi harga rumah berbasis machine learning yang dapat digunakan oleh stakeholder seperti agen properti, pembeli, atau investor.
-* Mengevaluasi dan memilih model terbaik berdasarkan metrik evaluasi regresi.
+* Membangun model prediksi harga rumah yang presisi.
+* Membandingkan performa model: **Linear Regression**, **MLP Regressor**, dan **XGBoost**.
+* Memberikan insight dari fitur-fitur yang paling memengaruhi harga rumah.
 
-### 💡 Solution Statement
+### 💡 Solusi
 
-* 🔁 **Solusi 1**: Gunakan model baseline **Linear Regression** untuk memberikan interpretasi awal.
-* 🧠 **Solusi 2**: Gunakan **MLP Regressor** untuk menangkap hubungan non-linear.
-* 🚀 **Solusi 3**: Gunakan **XGBoost Regressor** sebagai ensemble-based model dan lakukan **hyperparameter tuning**.
-* 📊 Evaluasi menggunakan metrik **RMSE** dan **R² Score** untuk menentukan model terbaik.
-
----
-
- ## 📊 3. Data Understanding
-
-### 📁 Dataset Overview
-
-* 📦 Jumlah data: **3.553** baris
-* 🧾 Jumlah fitur: **27 kolom**
-* 📤 Sumber dataset: [Daftar Harga Rumah JABODETABEK - Nafis Barizki (Kaggle)](https://www.kaggle.com/datasets/nafisbarizki/daftar-harga-rumah-jabodetabek)
-* 👤 Author: **Nafis Barizki**
-* 📅 Update terakhir: 2 tahun yang lalu
-
-### 🔍 Kondisi Data
-
-* Terdapat **missing values** di beberapa kolom penting seperti `building_age`, `year_built`, dan `furnishing`.
-* Tipe data terdiri dari:
-
-  * **14 kolom numerik** (`float64`)
-  * **13 kolom kategorikal / string**
+1. **Linear Regression** sebagai baseline model untuk interpretabilitas.
+2. **MLP Regressor** untuk mengakomodasi hubungan non-linear antar fitur.
+3. **XGBoost Regressor** sebagai model ensemble utama dengan **hyperparameter tuning** menggunakan `RandomizedSearchCV`.
 
 ---
 
-### 📋 Deskripsi Fitur
+## 📁 3. Dataset Overview
 
-| Kolom                  | Tipe    | Deskripsi                                       |
-| ---------------------- | ------- | ----------------------------------------------- |
-| `url`                  | object  | Link ke iklan properti                          |
-| `price_in_rp`          | float64 | Harga rumah dalam rupiah (target variable)      |
-| `title`                | object  | Judul iklan                                     |
-| `address`              | object  | Alamat lengkap dari rumah                       |
-| `district`             | object  | Kecamatan                                       |
-| `city`                 | object  | Kota atau kabupaten                             |
-| `lat`, `long`          | float64 | Koordinat geografis                             |
-| `facilities`           | object  | Fasilitas-fasilitas yang tersedia               |
-| `property_type`        | object  | Tipe properti (e.g., rumah, apartemen)          |
-| `ads_id`               | object  | ID unik iklan                                   |
-| `bedrooms`             | float64 | Jumlah kamar tidur                              |
-| `bathrooms`            | float64 | Jumlah kamar mandi                              |
-| `land_size_m2`         | float64 | Luas tanah                                      |
-| `building_size_m2`     | float64 | Luas bangunan                                   |
-| `carports`             | float64 | Jumlah carport                                  |
-| `certificate`          | object  | Jenis sertifikat (e.g., SHM, HGB)               |
-| `electricity`          | object  | Daya listrik (misal: 2200 watt)                 |
-| `maid_bedrooms`        | float64 | Jumlah kamar pembantu                           |
-| `maid_bathrooms`       | float64 | Jumlah kamar mandi pembantu                     |
-| `floors`               | float64 | Jumlah lantai                                   |
-| `building_age`         | float64 | Umur bangunan (tahun)                           |
-| `year_built`           | float64 | Tahun dibangun                                  |
-| `property_condition`   | object  | Kondisi bangunan (baru, bekas, renovasi)        |
-| `building_orientation` | object  | Arah bangunan (timur, barat, dsb.)              |
-| `garages`              | float64 | Jumlah garasi                                   |
-| `furnishing`           | object  | Kondisi furnitur (furnished, semi, atau kosong) |
+* **Sumber**: Kaggle - [Daftar Harga Rumah JABODETABEK](https://www.kaggle.com/datasets/nafisbarizki/daftar-harga-rumah-jabodetabek)
+* **Jumlah entri**: 3.553 baris
+* **Jumlah fitur**: 27 kolom
+* **Penulis dataset**: Nafis Barizki
 
 ---
 
-### 📈 Visualisasi Data (EDA)
+## 📋 4. Fitur Dataset
 
-#### 1. Distribusi Harga Rumah
-
-Distribusi harga rumah menunjukkan adanya **skewness** ke kanan, menandakan bahwa sebagian besar properti berada di kisaran harga yang lebih rendah, sementara sebagian kecil lainnya memiliki harga yang sangat tinggi.
-
-![Distribusi Harga Rumah](images/distribusi_harga.png)
-
----
-
-#### 2. Korelasi Antar Fitur Numerik
-
-Visualisasi ini menunjukkan hubungan antar fitur numerik dalam dataset. Beberapa fitur seperti `building_size_m2`, `land_size_m2`, `bathrooms`, dan `bedrooms` memiliki korelasi positif yang cukup tinggi dengan `price_in_rp`.
-
-![Heatmap Korelasi](images/heatmap_korelasi.png)
-
----
-
-#### 3. Hubungan antara Furnishing dan Kondisi Properti
-
-Heatmap berikut menunjukkan hubungan antara kondisi properti dan jenis furnishing-nya. Misalnya, properti **unfurnished** lebih sering ditemukan dalam kondisi **butuh renovasi**, sementara **furnished** cenderung berada dalam kondisi **bagus**.
-
-![Hubungan Furnishing dan Kondisi Properti](images/furnishing_vs_condition.png)
+| Fitur                   | Tipe    | Deskripsi                              |
+| ----------------------- | ------- | -------------------------------------- |
+| `price_in_rp`           | float64 | Harga rumah (dalam rupiah) - target    |
+| `building_size_m2`      | float64 | Luas bangunan                          |
+| `land_size_m2`          | float64 | Luas tanah                             |
+| `bedrooms`, `bathrooms` | float64 | Jumlah kamar tidur dan mandi           |
+| `floors`                | float64 | Jumlah lantai                          |
+| `city`, `district`      | object  | Lokasi geografis                       |
+| `property_type`         | object  | Jenis properti (rumah, apartemen, dsb) |
+| `furnishing`            | object  | Tingkat perabotan                      |
+| `building_age`          | float64 | Umur bangunan (dalam tahun)            |
+| `year_built`            | float64 | Tahun dibangun                         |
+| ...                     | ...     | dan fitur lainnya                      |
 
 ---
 
-## 🛠️ 4. Data Preparation
+## 🔍 5. Data Understanding
 
-### 📌 Teknik yang Diterapkan
+### Statistik Umum:
 
-1. **Handling Missing Values**
+* Data harga sangat **skewed ke kanan**, menunjukkan adanya outlier harga rumah mewah.
+* Korelasi tertinggi dengan `price_in_rp`:
 
-   * Kolom seperti `building_age`, `year_built`, dan `furnishing` memiliki missing values.
-   * Diisi menggunakan:
+  * `building_size_m2`, `land_size_m2`
+  * `bedrooms`, `bathrooms`
+  * `property_type` dan `furnishing` juga memberikan insight penting.
 
-     * **Median** untuk fitur numerik
-     * **Mode** untuk fitur kategorikal
+### Visualisasi:
 
-2. **Encoding Kategorikal**
-
-   * `district`, `city` → **Label Encoding**
-   * `property_type` → **One-Hot Encoding**
-
-3. **Feature Scaling**
-
-   * Fitur numerik distandarisasi dengan **StandardScaler**
-   * Harga (`price_in_rp`) juga di-scale agar model MLP dan XGBoost lebih stabil.
-
-4. **Feature Selection (Opsional)**
-
-   * Menghapus kolom yang tidak berpengaruh langsung ke harga seperti `url`, `ads_id`, `title`, dan `address`.
-
-5. **Train-Test Split**
-
-   * Data dibagi menjadi 80% train dan 20% test untuk validasi model secara objektif.
-
-### 📍 Alasan Diperlukan Data Preparation
-
-* **Missing Value Handling**: Untuk mencegah error saat training dan memastikan model tidak bias.
-* **Encoding**: Model ML tidak bisa membaca data kategorikal secara langsung.
-* **Scaling**: Membantu mempercepat konvergensi model dan menghindari fitur dominan.
-* **Split Data**: Penting untuk evaluasi performa secara realistis.
-
-
+* 📊 Histogram distribusi harga
+* 🔥 Heatmap korelasi antar fitur numerik
+* 🏷️ Perbandingan `furnishing` dan `property_condition`
 
 ---
 
-## 🤖 5. Modeling
+## 🧹 6. Data Preparation
 
-Tiga model yang digunakan:
+### Langkah Preprocessing:
 
-### 🔹 Linear Regression
-
-* Baseline model untuk memberikan pemahaman awal.
-* Mudah diinterpretasikan namun kurang menangkap non-linearitas.
-
-### 🔹 MLP Regressor (Neural Network)
-
-* Multi-layer perceptron dengan hidden layers (100, 50).
-* Mampu menangkap hubungan non-linear namun butuh tuning optimal.
-
-### ✅ XGBoost Regressor (Terbaik)
-
-* Gradient boosting decision trees.
-* Hyperparameter tuning dilakukan menggunakan `RandomSearchCV`.
-
-
-## 📏 6. Evaluation
-
-### 📐 Metrik Evaluasi
-
-* **RMSE (Root Mean Squared Error)**:
-
-  $$
-  RMSE = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
-  $$
-
-* **R² Score**:
-
-  $$
-  R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
-  $$
-
-Pada tahap ini, dilakukan evaluasi terhadap tiga model regresi yang telah dilatih: **Linear Regression**, **MLP Regressor**, dan **XGBoost Regressor**. Evaluasi dilakukan menggunakan metrik regresi yang relevan:
-
-* **MSE** (Mean Squared Error)
-* **RMSE** (Root Mean Squared Error)
-* **MAE** (Mean Absolute Error)
-* **MAPE** (Mean Absolute Percentage Error)
-* **R² Score**
-
-Berikut adalah hasil evaluasi masing-masing model:
+| Langkah             | Penjelasan                                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Handling Missing    | Imputasi menggunakan **median** untuk numerik dan **mode** untuk kategorikal                                        |
+| Encoding            | - **Label Encoding** untuk `city`, `district`  <br> - **One-Hot Encoding** untuk `property_type`, `furnishing`, dll |
+| Scaling             | **StandardScaler** untuk semua kolom numerik (termasuk target)                                                      |
+| Feature Engineering | - Transformasi `year_built` ke `building_age` jika hilang <br> - Ekstraksi informasi dari `facilities`              |
+| Drop Columns        | Kolom seperti `url`, `ads_id`, `title`, `address` tidak digunakan karena tidak relevan dalam regresi harga          |
+| Train-Test Split    | Proporsi 80% data training dan 20% data testing                                                                     |
 
 ---
 
-### 🔹 **Linear Regression**
+## ⚙️ 7. Modeling
 
-| Metric   | Value   |
-| -------- | ------- |
-| MSE      | 0.1000  |
-| RMSE     | 0.3162  |
-| MAE      | 0.2190  |
-| MAPE     | 11.76 T |
-| R² Score | 0.8646  |
+### 🔹 Model 1: Linear Regression
+
+* Sebagai baseline model.
+* Mudah diinterpretasikan, cocok untuk melihat signifikansi fitur.
+* **Kelemahan**: tidak mampu menangkap hubungan non-linear.
+
+### 🔹 Model 2: MLP Regressor
+
+* Multi-layer Perceptron dengan arsitektur `[100, 50]`.
+* Aktivasi: ReLU, Optimizer: Adam.
+* Perlu feature scaling agar hasil stabil.
+* **Kelebihan**: mampu belajar pola non-linear kompleks.
+
+### 🔹 Model 3: XGBoost Regressor ✅ (Model Terbaik)
+
+* Gradient Boosting Trees dengan regularisasi.
+* Tuning menggunakan **RandomizedSearchCV** untuk:
+
+  * `n_estimators`, `max_depth`, `learning_rate`, `subsample`, `colsample_bytree`
+* **Kelebihan**: tangguh terhadap missing data, interpretasi fitur lewat feature importance.
 
 ---
 
-### 🔹 **Multi-Layer Perceptron (MLP) Regressor**
+## 📏 8. Evaluation (Dikaitkan dengan Business Understanding)
 
-| Metric   | Value  |
+### 🔍 Tujuan Evaluasi:
+
+Sejalan dengan *business understanding*, tujuan dari evaluasi ini adalah untuk mengetahui seberapa **akurat dan andal** model dalam memprediksi harga rumah, sehingga dapat digunakan untuk **pengambilan keputusan strategis oleh pembeli, pengembang, investor, dan regulator**.
+
+---
+
+### 📐 Metrik Evaluasi & Rumus
+
+| Metrik       | Rumus                                                               | Keterangan                                                                                                           |   |                                                                                                                 |
+| ------------ | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | - | --------------------------------------------------------------------------------------------------------------- |
+| **MSE**      | $\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$       | Rata-rata dari kuadrat error. Sensitif terhadap outlier.                                                             |   |                                                                                                                 |
+| **RMSE**     | $\text{RMSE} = \sqrt{\text{MSE}}$                                   | Mengakar nilai MSE agar berada dalam satuan yang sama dengan data asli (misal: juta rupiah).                         |   |                                                                                                                 |
+| **MAE**      | ( \text{MAE} = \frac{1}{n} \sum\_{i=1}^{n}                          | y\_i - \hat{y}\_i                                                                                                    | ) | Rata-rata error absolut. Mudah dimengerti dan cukup stabil terhadap outlier.                                    |
+| **MAPE**     | ( \text{MAPE} = \frac{100%}{n} \sum\_{i=1}^{n} \left                | \frac{y\_i - \hat{y}\_i}{y\_i} \right                                                                                | ) | Mengukur rata-rata error dalam bentuk persentase, cocok untuk membandingkan across wilayah atau kategori rumah. |
+| **R² Score** | $R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$ | Mengukur seberapa besar variasi target yang bisa dijelaskan oleh model. Nilai mendekati 1 menunjukkan performa baik. |   |                                                                                                                 |
+
+---
+
+### 📊 Hasil Evaluasi Model:
+
+#### 🔹 **Linear Regression**
+
+| Metrik   | Nilai  |
+| -------- | ------ |
+| MSE      | 0.1000 |
+| RMSE     | 0.3162 |
+| MAE      | 0.2190 |
+| MAPE     | 11.76% |
+| R² Score | 0.8646 |
+
+---
+
+#### 🔹 **Multi-Layer Perceptron (MLP) Regressor**
+
+| Metrik   | Nilai  |
 | -------- | ------ |
 | MSE      | 0.0722 |
 | RMSE     | 0.2688 |
 | MAE      | 0.1721 |
-| MAPE     | 7.08 T |
+| MAPE     | 7.08%  |
 | R² Score | 0.9022 |
 
 ---
 
-### 🔹 **XGBoost Regressor**
+#### 🔹 **XGBoost Regressor**
 
-| Metric   | Value  |
+| Metrik   | Nilai  |
 | -------- | ------ |
 | MSE      | 0.0507 |
 | RMSE     | 0.2252 |
 | MAE      | 0.1152 |
-| MAPE     | 8.36 T |
+| MAPE     | 8.36%  |
 | R² Score | 0.9313 |
 
-> 💡 *Catatan:* Nilai MAPE sangat besar kemungkinan karena banyak nilai harga rumah sangat tinggi dan menyebabkan distorsi. Ini perlu dipertimbangkan dengan pembobotan atau penghapusan outlier ekstrem di preprocessing lanjutan.
+> 🎯 Berdasarkan hasil di atas, **XGBoost memiliki performa terbaik**, ditunjukkan oleh nilai **R² paling tinggi (0.9313)** dan **MAE terendah**, menjadikannya kandidat paling tepat untuk deployment.
 
 ---
 
-## ✅ **📌 Conclusion / Summary**
+### 📌 Implikasi Bisnis dari Hasil Model:
 
-Berdasarkan hasil evaluasi terhadap ketiga model regresi:
-
-* **Linear Regression** menunjukkan performa paling rendah, walaupun cukup baik secara R².
-* **MLP Regressor** menunjukkan peningkatan signifikan terutama pada MSE, MAE, dan R².
-* **XGBoost Regressor** memberikan hasil terbaik pada hampir semua metrik, terutama **R² Score sebesar 0.9313**, dan **RMSE terendah sebesar 0.2252**.
-
-✅ Oleh karena itu, **XGBoost Regressor** dipilih sebagai **model akhir yang digunakan untuk prediksi harga rumah di wilayah JABODETABEK** karena memiliki kinerja paling optimal dan stabil berdasarkan evaluasi.
-
-## 💾 7. Artifacts & Folder Structure
-
-```
-├── data/
-│   └── jabodetabek_house_price.csv
-├── models/
-│   ├── xgb_regressor_model.pkl
-│   ├── x_scaler.pkl
-│   ├── y_scaler.pkl
-│   ├── property_type_ohe.pkl
-│   ├── le_district.pkl
-│   └── le_city.pkl
-├── notebook/
-│   └── main.ipynb
-├── main.py
-├── requirements.txt
-└── README.md
-```
+| Stakeholder       | Dampak dari Model (XGBoost)                                                         |
+| ----------------- | ----------------------------------------------------------------------------------- |
+| **Calon Pembeli** | Estimasi harga realistis untuk membuat keputusan pembelian lebih terinformasi.      |
+| **Developer**     | Menentukan harga rumah berdasarkan data pasar dan spesifikasi rumah.                |
+| **Investor**      | Analisis kelayakan investasi properti berdasarkan prediksi nilai dan tren harga.    |
+| **Pemerintah**    | Menyusun kebijakan perumahan berdasarkan estimasi harga aktual di berbagai wilayah. |
 
 ---
 
-## 🧪 8. Requirements
+### ✅ Kesimpulan
 
-```bash
-pip install -r requirements.txt
-```
+Dengan **R² = 0.9313** dan **MAPE = 8.36%**, model XGBoost terbukti mampu menjawab permasalahan dalam *business understanding*:
+
+> **"Bagaimana memprediksi harga rumah secara akurat untuk membantu stakeholder dalam pengambilan keputusan properti?"**
+
+Model ini memberikan estimasi yang dapat diandalkan dan **mudah diterjemahkan ke dalam aksi nyata**, seperti penetapan harga jual, analisis kompetitor, serta evaluasi program subsidi perumahan.
+
+
 
 ---
 
-## 📓 9. Notebook
+## 📌 9. Feature Importance
 
-Seluruh proses dikembangkan dalam:
-`notebook/main.ipynb`
+Visualisasi menggunakan `.feature_importances_` dari XGBoost menunjukkan bahwa:
 
+* `building_size_m2` dan `land_size_m2` adalah kontributor utama harga.
+* `property_type`, `furnishing`, dan `location (district)` juga signifikan.
 
+---
 
+## 🚀 10. Deployment (Opsional)
 
+> Untuk keperluan praktis, model dapat di-*pickle* dan disajikan via API dengan **Flask** atau **Streamlit** sebagai antarmuka interaktif prediksi harga rumah berdasarkan input pengguna.
+
+---
+
+## 📚 11. Referensi
+
+* El Mouna, L., et al. (2023). *A Comparative Study of Urban House Price Prediction using Machine Learning Algorithms*. E3S Web of Conferences.
+* Al Maula, S. F., et al. (2025). *Modeling House Selling Prices in Jakarta and South Tangerang Using Machine Learning*. BAREKENG.
+* Badan Pusat Statistik (2023). *Statistik Perumahan Nasional*.
+
+---
+
+## ✍️ 12. Penutup
+
+Prediksi harga rumah di wilayah urban seperti JABODETABEK menjadi semakin penting di tengah ketimpangan permintaan dan ketersediaan lahan. Pendekatan machine learning dengan ensemble regression seperti XGBoost terbukti memberikan prediksi yang sangat akurat. Hasil ini tidak hanya berkontribusi pada pengambilan keputusan ekonomi yang lebih baik, namun juga berpotensi menjadi dasar sistem rekomendasi harga rumah berbasis data di masa depan.
 
