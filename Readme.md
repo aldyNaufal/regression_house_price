@@ -142,28 +142,130 @@ Hal ini membantu model belajar dengan **lebih stabil** dan **menghindari bias ek
 
 ---
 
-## ⚙️ 7. Modeling
+Berikut adalah versi **revisi dan penyempurnaan bagian Modeling (bab 7)** berdasarkan **kode aktual tuning model MLP dan XGBoost yang kamu gunakan**. Penjelasan sudah **disesuaikan dengan parameter dan nilai-nilai** yang kamu tetapkan.
 
-### 🔹 Model 1: Linear Regression
+---
 
-* Sebagai baseline model.
-* Mudah diinterpretasikan, cocok untuk melihat signifikansi fitur.
-* **Kelemahan**: tidak mampu menangkap hubungan non-linear.
+## ⚙️ 7. Model Development
 
-### 🔹 Model 2: MLP Regressor
 
-* Multi-layer Perceptron dengan arsitektur `[100, 50]`.
-* Aktivasi: ReLU, Optimizer: Adam.
-* Perlu feature scaling agar hasil stabil.
-* **Kelebihan**: mampu belajar pola non-linear kompleks.
+### 🔹 Model 1: **Linear Regression**
 
-### 🔹 Model 3: XGBoost Regressor ✅ (Model Terbaik)
+#### ✅ Alasan Pemilihan:
 
-* Gradient Boosting Trees dengan regularisasi.
-* Tuning menggunakan **RandomizedSearchCV** untuk:
+* Digunakan sebagai baseline karena sederhana dan mudah diinterpretasi.
+* Membantu melihat signifikansi kontribusi masing-masing fitur.
 
-  * `n_estimators`, `max_depth`, `learning_rate`, `subsample`, `colsample_bytree`
-* **Kelebihan**: tangguh terhadap missing data, interpretasi fitur lewat feature importance.
+#### ⚙️ Cara Kerja:
+
+Linear Regression memodelkan hubungan linier antara fitur dan target. Model ini menghitung bobot optimal untuk setiap fitur agar meminimalkan selisih prediksi dan nilai aktual.
+
+#### ❌ Kelemahan:
+
+* Tidak bisa menangkap hubungan non-linear.
+* Sangat sensitif terhadap multikolinearitas dan outlier.
+
+---
+
+### 🔹 Model 2: **MLP Regressor (Neural Network)**
+
+#### ✅ Alasan Pemilihan:
+
+MLP (Multi-Layer Perceptron) Regressor mampu memodelkan hubungan **non-linear kompleks** antara fitur dan harga. Sangat cocok ketika pola data tidak linier.
+
+#### ⚙️ Cara Kerja:
+
+MLP adalah jaringan saraf berlapis yang menggunakan **fungsi aktivasi** non-linear (ReLU atau Tanh) dan belajar dari error melalui propagasi balik (backpropagation).
+
+#### ⚙️ Konfigurasi Sebelum Tuning:
+
+```python
+MLPRegressor(random_state=42, early_stopping=True)
+```
+
+#### 🔧 Hyperparameter Tuning (via RandomizedSearchCV):
+
+| Parameter            | Nilai Kandidat (Ruang Pencarian)                     |
+| -------------------- | ---------------------------------------------------- |
+| `hidden_layer_sizes` | \[(128, 64, 32), (256, 128, 64), (128, 128, 64, 32)] |
+| `activation`         | \['relu', 'tanh']                                    |
+| `solver`             | \['adam', 'lbfgs']                                   |
+| `alpha`              | Uniform(1e-5, 1e-3) – regulasi L2                    |
+| `learning_rate`      | \['constant', 'adaptive']                            |
+| `max_iter`           | \[500, 1000]                                         |
+
+🔍 Tuning dilakukan dengan:
+
+```python
+RandomizedSearchCV(..., n_iter=20, scoring='r2', cv=3)
+```
+
+#### ✅ Kelebihan:
+
+* Mampu mempelajari relasi kompleks.
+* Support berbagai bentuk arsitektur.
+
+#### ❌ Kekurangan:
+
+* Butuh scaling dan tuning untuk stabilitas.
+* Interpretasi relatif sulit.
+
+---
+
+### 🔹 Model 3: **XGBoost Regressor** ✅ (*Model Terbaik*)
+
+#### ✅ Alasan Pemilihan:
+
+XGBoost adalah algoritma gradient boosting berbasis pohon yang sangat populer karena **akurasi tinggi, kecepatan, dan regularisasi internal**.
+
+#### ⚙️ Cara Kerja:
+
+Menggunakan pendekatan boosting, di mana model baru dibangun untuk memperbaiki kesalahan model sebelumnya. XGBoost juga mendukung pruning, handling missing value, dan parallel learning.
+
+#### ⚙️ Konfigurasi Sebelum Tuning:
+
+```python
+XGBRegressor(random_state=42)
+```
+
+#### 🔧 Hyperparameter Tuning (via RandomizedSearchCV):
+
+| Parameter          | Nilai Kandidat        |
+| ------------------ | --------------------- |
+| `n_estimators`     | \[100, 200, 300, 500] |
+| `max_depth`        | \[3, 5, 6, 8]         |
+| `learning_rate`    | \[0.01, 0.05, 0.1]    |
+| `subsample`        | \[0.6, 0.8, 1.0]      |
+| `colsample_bytree` | \[0.6, 0.8, 1.0]      |
+
+🔍 Tuning dilakukan dengan:
+
+```python
+RandomizedSearchCV(..., n_iter=20, scoring='r2', cv=3)
+```
+
+#### ✅ Kelebihan:
+
+* Akurasi tinggi dan cepat.
+* Tahan terhadap outlier dan missing values.
+* Mendukung interpretasi fitur melalui **feature importance**.
+
+#### ❌ Kekurangan:
+
+* Konfigurasi cukup kompleks.
+* Butuh tuning yang hati-hati untuk performa optimal.
+
+---
+
+### 📌 Summary:
+
+| Model             | Pola yang Bisa Ditangkap | Tuning     | Interpretasi | Outlier Friendly | Hasil Akhir   |
+| ----------------- | ------------------------ | ---------- | ------------ | ---------------- | ------------- |
+| Linear Regression | Linear                   | ✖️         | ✅            | ✖️               | Moderate      |
+| MLP Regressor     | Non-linear               | ✅ (Random) | ✖️           | ✖️               | Baik          |
+| XGBoost Regressor | Non-linear + Interaksi   | ✅ (Random) | ✅            | ✅                | **Terbaik ✅** |
+
+
 
 ---
 
