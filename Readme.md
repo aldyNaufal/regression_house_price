@@ -102,9 +102,45 @@ Pendekatan ini dirancang untuk menjawab tantangan pasar properti di JABODETABEK,
 
 ### Visualisasi:
 
-* 📊 Histogram distribusi harga
-* 🔥 Heatmap korelasi antar fitur numerik
-* 🏷️ Perbandingan `furnishing` dan `property_condition`
+
+
+#### 1. 📉 **Distribusi Harga Properti**
+
+![Distribusi Harga](images/disribusi_harga.png)
+
+* **Tujuan Visualisasi**: Menunjukkan distribusi nilai `price_in_rp` (harga properti) untuk memahami skala data dan potensi outlier.
+* **Insight**:
+
+  * Distribusi harga **right-skewed**, menunjukkan banyak properti berada di rentang harga lebih rendah, sementara sedikit properti bernilai sangat tinggi.
+  * Penting untuk normalisasi/skaling data serta menggunakan model yang robust terhadap outlier (seperti **XGBoost** atau **RobustScaler**).
+
+---
+
+#### 2. 🔥 **Heatmap Korelasi Antar Fitur Numerik**
+
+![Heatmap Korelasi](images/heatmap_korelasi.png)
+
+* **Tujuan Visualisasi**: Mengidentifikasi hubungan linear antara fitur numerik dengan target (`price_in_rp`) serta antar fitur numerik lainnya.
+* **Insight**:
+
+  * Fitur seperti `building_size_m2`, `land_size_m2`, `bathrooms`, dan `bedrooms` menunjukkan **korelasi positif** yang kuat dengan `price_in_rp`.
+  * Ini mengindikasikan bahwa fitur-fitur tersebut relevan dan berkontribusi signifikan terhadap model prediktif.
+  * Juga membantu menghindari multikolinearitas berlebih jika menggunakan model seperti **Linear Regression**.
+
+---
+
+#### 3. 🏷️ **Perbandingan `furnishing` vs. `property_condition`**
+
+![Furnishing vs Condition](images/furnishing_vs_condition.png)
+
+* **Tujuan Visualisasi**: Memahami distribusi furnitur (`furnishing`) terhadap kondisi properti (`property_condition`), yang keduanya merupakan fitur kategorikal.
+* **Insight**:
+
+  * Properti yang **unfurnished** lebih banyak ditemukan dalam kondisi **perlu renovasi**.
+  * Sementara properti **furnished** cenderung dalam kondisi **bagus** atau siap huni.
+  * Hubungan ini penting karena dapat menunjukkan **kombinasi fitur kategorikal** yang secara tidak langsung memengaruhi harga properti.
+
+
 
 ---
 
