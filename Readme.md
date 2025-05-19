@@ -106,7 +106,7 @@ Pendekatan ini dirancang untuk menjawab tantangan pasar properti di JABODETABEK,
 
 #### 1. 📉 **Distribusi Harga Properti**
 
-![Distribusi Harga](images/disribusi_harga.png)
+![Distribusi Harga](images/distribusi_harga.png)
 
 * **Tujuan Visualisasi**: Menunjukkan distribusi nilai `price_in_rp` (harga properti) untuk memahami skala data dan potensi outlier.
 * **Insight**:
